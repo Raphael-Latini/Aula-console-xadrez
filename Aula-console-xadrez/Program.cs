@@ -14,23 +14,31 @@ namespace Aula_console_xadrez
                 PartidaDeXadrez partida = new PartidaDeXadrez();
                 while (!partida.terminada)
                 {
+                    try { 
                     Console.Clear();
                     Tela.imprimirTabuleiro(partida.tab);
                     Console.WriteLine();
+                    Console.WriteLine("Turno: " +partida.turno);
+                    Console.WriteLine("aguardando jogada: "+partida.jogadorAtual);
                     Console.Write("origem: ");
                     Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    partida.validarPosicaoOrigem(origem);
 
                     bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
                     Console.Clear();
                     Tela.imprimirTabuleiro(partida.tab,posicoesPossiveis);
-
-
-
                     Console.Write("Destino: ");
                     Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+                    partida.validarPosicaoDestino(origem, destino);
 
-                    partida.executarMovimento(origem, destino);
+                    partida.realizarJogada(origem, destino);
 
+                    }
+                    catch(TabuleiroExceptions e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine(); 
+                    }
 
                 }
 
