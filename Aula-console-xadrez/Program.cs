@@ -38,6 +38,9 @@ namespace Aula_console_xadrez
                     }
 
                 }
+                Console.Clear();
+                Tela.imprimirPartida(partida);
+
 
                 Console.ReadLine();
             }
